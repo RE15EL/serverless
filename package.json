@@ -1,8 +1,11 @@
 {
   "devDependencies": {
+    "serverless-dynamodb": "^0.2.43",
     "serverless-offline": "^13.1.0"
   },
   "dependencies": {
+    "@middy/core": "^4.6.4",
+    "@middy/http-json-body-parser": "^4.6.4",
     "aws-sdk": "^2.1464.0",
     "uuid": "^9.0.1"
   }
