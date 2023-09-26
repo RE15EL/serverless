@@ -5,6 +5,39 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: us-west-2
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - dinamodb:*
+          Resource:
+            - arn:aws:dynamodb:us-west-2:581051576451:table/taskTable
+
+resources:
+  Resources:
+    taskTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: taskTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
 
 plugins:
   - serverless-offline
